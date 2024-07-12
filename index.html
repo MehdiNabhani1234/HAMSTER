@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="asstes/css/style.css">
+</head>
+<body>
+    <div id="countdown"></div>
+    <main>
+        <form id="formuser" action="">
+            <h2>Reserve Time</h2>
+            <div>
+                <label for="">UserName</label>
+                <input id="username" type="text" required>
+            </div>
+            <div>
+                <label for="">Nobitex Wallet Code</label>
+                <input  type="text" required>
+            </div>
+            <div>
+                <label for="">Tonkeeper Wallet Code</label>
+                <input  type="text" required>
+            </div>
+            <input type="submit" value="Reserve">
+        </form>
+        <form action="" id="calculate">
+            <h2>Calculate Money</h2>
+            <div>
+                <label for="مقدار سکه خود رو را وارد کنید">Coin</label>
+                <input type="text" required>
+            </div>
+            <div>
+                <label for="مقدار پروفیت خود رو را وارد کنید">Profit</label>
+                <input id="profit" type="text" required>
+            </div>
+            <input type="submit" value="Calculate">
+            <p id="result"></p>
+        </form>
+    </main>
+    <p id="text"></p>
+
+    <script>
+        // تابعی برای راه اندازی تایمر
+        function startTimer(duration, display) {
+            let timer = duration, days, hours, minutes, seconds;
+            const interval = setInterval(() => {
+                days = Math.floor(timer / (24 * 60 * 60));
+                hours = Math.floor((timer % (24 * 60 * 60)) / (60 * 60));
+                minutes = Math.floor((timer % (60 * 60)) / 60);
+                seconds = Math.floor(timer % 60);
+
+                display.textContent = `${days} Days ${hours} Hours ${minutes} minutes ${seconds} seconds`;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "تایمر تمام شد";
+                }
+
+                // ذخیره زمان باقی مانده در localStorage
+                localStorage.setItem("remainingTime", timer);
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const countdownDisplay = document.getElementById('countdown');
+            const savedTime = localStorage.getItem("remainingTime");
+
+            let twentyDaysInSeconds = 20 * 24 * 60 * 60;
+            let remainingTime;
+
+            if (savedTime !== null && savedTime > 0) {
+                remainingTime = savedTime;
+            } else {
+                // ذخیره زمان پایان تایمر در localStorage
+                const endTime = new Date().getTime() + twentyDaysInSeconds * 1000;
+                localStorage.setItem("endTime", endTime);
+                remainingTime = twentyDaysInSeconds;
+            }
+
+            // محاسبه زمان باقی مانده در هر بار بارگذاری صفحه
+            const endTime = localStorage.getItem("endTime");
+            if (endTime) {
+                const currentTime = new Date().getTime();
+                remainingTime = Math.floor((endTime - currentTime) / 1000);
+                if (remainingTime <= 0) {
+                    remainingTime = 0;
+                }
+            }
+
+            startTimer(remainingTime, countdownDisplay);
+        };
+    </script>
+    <script src="asstes/js/main.js"></script>
+</body>
+</html>

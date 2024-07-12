@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    box-shadow: 0 0 8px 1px gray;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 15px;
+    height: 60%;
+    background-color: white;
+margin-top: 100px;
+}
+
+form>div>input {
+    margin: 15px;
+    width: calc(100% - 30px);
+    padding: 5px;
+    border: none;
+    border: 1px solid rgb(189, 189, 189);
+
+}
+
+form>input {
+    margin: 15px;
+    width: calc(100% - 30px);
+    padding: 5px;
+    border: none;
+    border: 1px solid rgb(189, 189, 189);
+
+}
+
+form>div>input:focus {
+    outline: none;
+}
+
+label {
+    text-align: left;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 18px;
+}
+
+form>h2 {
+    text-align: center;
+    color: orange;
+    margin-bottom: 20px;
+}
+
+#result {
+    padding-left: 20px;
+    color: orange;
+    font-size: 22px;
+    padding-right: 5px;
+}
+
+body {
+    background: url('../images/photo_2024-07-12_05-24-35.jpg') no-repeat center center / cover;
+height: 100%;
+}
+
+#countdown {
+    font-size: 25px;
+    text-align: center;
+    margin: 20px 0;
+    background-color: white;
+}
+
+@media only screen and (max-width: 900px) {
+    main {
+        display: block;
+    }
+
+    form {
+        width: calc(100% - 60px);
+        margin: 20px 30px;
+    }
+}
